@@ -1,0 +1,16 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const router = express_1.default.Router();
+const Verb = require('../models/Verb');
+router.get('/', (req, res) => {
+    Verb.findAll({
+        orderBy: [['id', 'ASC']],
+    })
+        .then((verbs) => res.send(verbs))
+        .catch((err) => res.send(err));
+});
+module.exports = router;
