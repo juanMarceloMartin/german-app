@@ -1,0 +1,12 @@
+table {
+  width: 100%;
+}
+
+.mat-row, mat-header-row, mat-footer-row, th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
+  border-bottom-color: none !important;
+  border: none;
+}
+
+.example-full-width {
+  width: 90%;
+}

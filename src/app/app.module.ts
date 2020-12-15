@@ -7,7 +7,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NounsComponent } from './components/nouns/nouns.component';
 import { VerbsComponent } from './components/verbs/verbs.component';
-
+import { MatTableModule } from '@angular/material/table';
+import { MatInputModule } from '@angular/material/input';
+import { NounService } from '../services/noun.service';
 
 @NgModule({
   declarations: [AppComponent, NounsComponent, VerbsComponent],
@@ -16,8 +18,10 @@ import { VerbsComponent } from './components/verbs/verbs.component';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    MatTableModule,
+    MatInputModule
   ],
-  providers: [],
+  providers: [NounService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
