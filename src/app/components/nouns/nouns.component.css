@@ -1,6 +1,12 @@
 table {
-  width: 100%;
+  width: 40%;
+  margin: 50px auto;
 }
+
+th {
+  text-align: center !important;
+}
+
 
 .mat-row, mat-header-row, mat-footer-row, th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
   border-bottom-color: none !important;
@@ -9,4 +15,21 @@ table {
 
 .example-full-width {
   width: 90%;
+}
+
+.correct {
+  color: #6cca6c;
+}
+
+.wrong {
+  color: #FF0000;
+}
+
+.tooltip-red {
+  background-color: #FF0000;
+}
+
+th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
+  border-bottom-width: none !important;
+  border-bottom-style: none !important;
 }

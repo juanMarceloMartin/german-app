@@ -1,51 +1,57 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { INoun } from 'src/interfaces/noun';
 import { NounService } from '../../../services/noun.service';
-
-export interface PeriodicElement {
-  noun: string;
-  article: string;
-  articleInput: string;
-  plural: string;
-  pluralInput: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {noun: 'Kind', article: 'Die', articleInput: '', plural: 'Kinder', pluralInput: '' },
-  {noun: 'Kind', article: 'Die', articleInput: '', plural: 'Kinder', pluralInput: '' },
-  {noun: 'Kind', article: 'Die', articleInput: '', plural: 'Kinder', pluralInput: '' },
-  {noun: 'Kind', article: 'Die', articleInput: '', plural: 'Kinder', pluralInput: '' },
-  {noun: 'Kind', article: 'Die', articleInput: '', plural: 'Kinder', pluralInput: '' },
-  {noun: 'Kind', article: 'Die', articleInput: '', plural: 'Kinder', pluralInput: '' },
-  {noun: 'Kind', article: 'Die', articleInput: '', plural: 'Kinder', pluralInput: '' },
-  {noun: 'Kind', article: 'Die', articleInput: '', plural: 'Kinder', pluralInput: '' },
-  {noun: 'Kind', article: 'Die', articleInput: '', plural: 'Kinder', pluralInput: '' },
-  {noun: 'Kind', article: 'Die', articleInput: '', plural: 'Kinder', pluralInput: '' },
-  {noun: 'Kind', article: 'Die', articleInput: '', plural: 'Kinder', pluralInput: '' },
-];
 
 @Component({
   selector: 'app-nouns',
   templateUrl: './nouns.component.html',
   styleUrls: ['./nouns.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class NounsComponent implements OnInit {
   displayedColumns: string[] = ['noun', 'articleInput', 'pluralInput'];
-  dataSource = ELEMENT_DATA;
+  dataSource: INoun[];
+  articleAttempts: {} = {};
+  pluralAttempts: {} = {};
 
-  public nouns = []
-
-  constructor(private _nounService: NounService) { }
+  constructor(private _nounService: NounService) {
+  }
 
   ngOnInit(): void {
     this._nounService.getNouns()
       .subscribe(data => {
-        this.nouns = data;
-        console.log(this.nouns)
+        this.dataSource = data;
+        this.dataSource.forEach(noun => {
+          this.articleAttempts[noun.id] = { attempt: 2, response: false };
+          this.pluralAttempts[noun.id] = { attempt: 3, response: false };
+        })
       })
   }
 
- 
-  
-  
+  blurTest(test: string) {
+    alert(test)
+  }
+
+  checkArticle(id: number, solution: string, input: string) {
+    if (input) {
+      if (solution.toLocaleLowerCase() !== input.toLocaleLowerCase()) {
+        id > 0 ? this.articleAttempts[id].attempt-- : null;
+        this.articleAttempts[id].response = false;
+      } else {
+        this.articleAttempts[id].response = true;
+      }
+    }
+  }
+
+  checkPlural(id: number, solution: string, input: string) {
+    if (input) {
+      if (solution.toLocaleLowerCase() !== input.toLocaleLowerCase()) {
+        id > 0 ? this.pluralAttempts[id].attempt-- : null;
+        this.pluralAttempts[id].response = false;
+      } else {
+        this.pluralAttempts[id].response = true;
+      }
+    }
+  }
 
 }

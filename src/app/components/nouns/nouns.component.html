@@ -1,41 +1,49 @@
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-  <!--- Note that these columns can be defined in any order.
-        The actual rendered columns are set as a property on the row definition" -->
-
-  <!-- Position Column -->
   <ng-container matColumnDef="noun">
     <th mat-header-cell *matHeaderCellDef> Noun </th>
-    <td mat-cell *matCellDef="let element"> {{element.noun}} </td>
+    <td mat-cell *matCellDef="let element" matTooltip="{{element.translation}}" matTooltipPosition="above">
+      {{element.noun}} </td>
   </ng-container>
 
-  <!-- Name Column -->
-  <ng-container matColumnDef="article">
-    <th mat-header-cell *matHeaderCellDef> Article </th>
-    <td mat-cell *matCellDef="let element"> {{element.article}} </td>
-  </ng-container>
-
-  <!-- Weight Column -->
   <ng-container matColumnDef="articleInput">
     <th mat-header-cell *matHeaderCellDef> Die, Der oder Das? </th>
     <td mat-cell *matCellDef="let element">
       <mat-form-field class="example-full-width">
-        <input matInput>
+        <input readonly="{{!articleAttempts[element.id].attempt}}" matInput [(ngModel)]="element.articleInput"
+          (blur)="checkArticle(element.id, element.article, element.articleInput)">
+        <mat-icon *ngIf="articleAttempts[element.id].response; else wrong" matSuffix class="correct"
+          matTooltip="Info about the action">done</mat-icon>
+        <ng-template #wrong>
+          <mat-icon *ngIf="articleAttempts[element.id].attempt === 1; else finished" matSuffix class="wrong"
+            matTooltip="+ {{articleAttempts[element.id].attempt}}" matTooltipPosition="above"
+            matTooltipClass="tooltip-red">error
+          </mat-icon>
+          <ng-template #finished>
+            <mat-icon *ngIf="!articleAttempts[element.id].attempt" matSuffix class="wrong" >close</mat-icon>
+          </ng-template>
+        </ng-template>
       </mat-form-field>
     </td>
   </ng-container>
 
-  <!-- Symbol Column -->
-  <ng-container matColumnDef="plural">
-    <th mat-header-cell *matHeaderCellDef> Plural </th>
-    <td mat-cell *matCellDef="let element"> {{element.plural}} </td>
-  </ng-container>
-
   <ng-container matColumnDef="pluralInput">
-    <th mat-header-cell *matHeaderCellDef> Plural Input </th>
+    <th mat-header-cell *matHeaderCellDef> Plural</th>
     <td mat-cell *matCellDef="let element">
       <mat-form-field class="example-full-width">
-        <input matInput>
+        <input readonly="{{!pluralAttempts[element.id].attempt}}" matInput [(ngModel)]="element.pluralInput"
+          (blur)="checkPlural(element.id, element.plural, element.pluralInput)">
+        <mat-icon *ngIf="pluralAttempts[element.id].response; else wrong" matSuffix class="correct">done</mat-icon>
+        <ng-template #wrong>
+          <mat-icon *ngIf="pluralAttempts[element.id].attempt && pluralAttempts[element.id].attempt < 3; else finished"
+            matSuffix class="wrong" matTooltip="+ {{pluralAttempts[element.id].attempt}}" matTooltipPosition="above"
+            matTooltipClass="tooltip-red">error
+          </mat-icon>
+          <ng-template #finished>
+            <mat-icon *ngIf="!pluralAttempts[element.id].attempt" matSuffix class="wrong" matTooltip="{{element.plural}}" matTooltipPosition="above"
+            matTooltipClass="tooltip-red">close</mat-icon>
+          </ng-template>
+        </ng-template>
       </mat-form-field>
     </td>
   </ng-container>
@@ -43,4 +51,3 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
-

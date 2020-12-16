@@ -4,12 +4,15 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NounsComponent } from './components/nouns/nouns.component';
 import { VerbsComponent } from './components/verbs/verbs.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
 import { NounService } from '../services/noun.service';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [AppComponent, NounsComponent, VerbsComponent],
@@ -17,11 +20,14 @@ import { NounService } from '../services/noun.service';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
     BrowserAnimationsModule,
     MatTableModule,
-    MatInputModule
+    MatInputModule,
+    MatIconModule,
+    MatTooltipModule
   ],
   providers: [NounService],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
