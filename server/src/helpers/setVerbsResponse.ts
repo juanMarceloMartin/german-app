@@ -1,5 +1,7 @@
 import Verb from '../interaces/verb';
 import VerbResponse from '../interaces/verb-response';
+import removeDuplicateEntries from './removeDuplicateEntries';
+
 
 export default function setVerbsResponse(data: Verb[], qty = 0): VerbResponse[] {
   let result: VerbResponse[] = [];
@@ -18,24 +20,16 @@ export default function setVerbsResponse(data: Verb[], qty = 0): VerbResponse[] 
       result.push(entry);
     });
   } else {
-    const indexes: number[] = [];
-    data.forEach(noun => indexes.push(noun.id));
-    const randomIndex: number[] = [];
-
-
+    const indexArray = removeDuplicateEntries(data, qty);
     for (let i = 0; i < qty; i++) {
-      const index = Math.floor(Math.random() * indexes.length);
-      randomIndex.push(index);
-      indexes.splice(indexes.indexOf(index), 1);
-      
       let entry: VerbResponse = {
-        id: data[index].id,
-        verb: data[index].verb,
-        auxiliary: data[index].auxiliary,
+        id: data[indexArray[i]].id,
+        verb: data[indexArray[i]].verb,
+        auxiliary: data[indexArray[i]].auxiliary,
         auxiliaryInput: '',
-        participle: data[index].participle,
+        participle: data[indexArray[i]].participle,
         participleInput: '',
-        translation: data[index].translation
+        translation: data[indexArray[i]].translation
       };
       result.push(entry);
     }

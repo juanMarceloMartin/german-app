@@ -14,9 +14,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { NounService } from '../services/noun.service';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { VerbService } from 'src/services/verb.service';
+import { LandingComponent } from './components/landing/landing.component';
 
 @NgModule({
-  declarations: [AppComponent, NounsComponent, VerbsComponent],
+  declarations: [AppComponent, NounsComponent, VerbsComponent, LandingComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

@@ -1,5 +1,6 @@
 import Noun from '../interaces/noun';
 import NounResponse from '../interaces/noun-response';
+import removeDuplicateEntries from './removeDuplicateEntries';
 
 export default function setNounsResponse(data: Noun[], qty = 0): NounResponse[] {
   let result: NounResponse[] = [];
@@ -18,23 +19,16 @@ export default function setNounsResponse(data: Noun[], qty = 0): NounResponse[] 
       result.push(entry);
     });
   } else {
-    const indexes: number[] = [];
-    data.forEach(noun => indexes.push(noun.id));
-    const randomIndex: number[] = [];
-
+    const indexArray = removeDuplicateEntries(data, qty);
     for (let i = 0; i < qty; i++) {
-      const index = Math.floor(Math.random() * indexes.length);
-      randomIndex.push(index);
-      indexes.splice(indexes.indexOf(index), 1);
-
       let entry: NounResponse = {
-        id: data[index].id,
-        noun: data[index].noun,
-        article: data[index].article,
+        id: data[indexArray[i]].id,
+        noun: data[indexArray[i]].noun,
+        article: data[indexArray[i]].article,
         articleInput: '',
-        plural: data[index].plural,
+        plural: data[indexArray[i]].plural,
         pluralInput: '',
-        translation: data[index].translation
+        translation: data[indexArray[i]].translation
       };
       result.push(entry);
     }
