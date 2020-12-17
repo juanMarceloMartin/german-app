@@ -11,26 +11,29 @@ export default function setNounsResponse(data: Noun[], qty = 0): NounResponse[] 
         noun: noun.noun,
         article: noun.article,
         articleInput: '',
-        articleTries: 2,
         plural: noun.plural,
         pluralInput: '',
-        pluralTries: 3  ,
         translation: noun.translation,
       };
       result.push(entry);
     });
   } else {
+    const indexes: number[] = [];
+    data.forEach(noun => indexes.push(noun.id));
+    const randomIndex: number[] = [];
+
     for (let i = 0; i < qty; i++) {
-      const index = Math.floor(Math.random() * data.length);
+      const index = Math.floor(Math.random() * indexes.length);
+      randomIndex.push(index);
+      indexes.splice(indexes.indexOf(index), 1);
+
       let entry: NounResponse = {
         id: data[index].id,
         noun: data[index].noun,
         article: data[index].article,
         articleInput: '',
-        articleTries: 2,
         plural: data[index].plural,
         pluralInput: '',
-        pluralTries: 3,
         translation: data[index].translation
       };
       result.push(entry);
