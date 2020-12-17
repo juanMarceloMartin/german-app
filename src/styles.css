@@ -2,3 +2,45 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+table {
+    width: 60%;
+    margin: 50px auto;
+  }
+  
+  th {
+    text-align: center !important;
+  }
+  
+  
+  .mat-row, mat-header-row, mat-footer-row, th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
+    border-bottom-color: none !important;
+    border: none;
+    font-size: large !important;
+  }
+  
+  .example-full-width {
+    width: 90%;
+  }
+  
+  .correct {
+    color: #6cca6c;
+  }
+  
+  .wrong {
+    color: #FF0000;
+  }
+  
+  .tooltip {
+    font-size: large;
+  }
+
+  .tooltip-red {
+    font-size: large;
+    background-color: #FF0000;
+  }
+  
+  th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
+    border-bottom-width: none !important;
+    border-bottom-style: none !important;
+  }

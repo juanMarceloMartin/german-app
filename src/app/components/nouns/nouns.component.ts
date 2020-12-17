@@ -28,14 +28,10 @@ export class NounsComponent implements OnInit {
       })
   }
 
-  blurTest(test: string) {
-    alert(test)
-  }
-
   checkArticle(id: number, solution: string, input: string) {
     if (input) {
       if (solution.toLocaleLowerCase() !== input.toLocaleLowerCase()) {
-        id > 0 ? this.articleAttempts[id].attempt-- : null;
+        id > 0 && this.articleAttempts[id].attempt > 0 ? this.articleAttempts[id].attempt-- : null;
         this.articleAttempts[id].response = false;
       } else {
         this.articleAttempts[id].response = true;
@@ -46,7 +42,7 @@ export class NounsComponent implements OnInit {
   checkPlural(id: number, solution: string, input: string) {
     if (input) {
       if (solution.toLocaleLowerCase() !== input.toLocaleLowerCase()) {
-        id > 0 ? this.pluralAttempts[id].attempt-- : null;
+        id > 0 && this.pluralAttempts[id].attempt ? this.pluralAttempts[id].attempt-- : null;
         this.pluralAttempts[id].response = false;
       } else {
         this.pluralAttempts[id].response = true;

@@ -13,6 +13,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { NounService } from '../services/noun.service';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { VerbService } from 'src/services/verb.service';
 
 @NgModule({
   declarations: [AppComponent, NounsComponent, VerbsComponent],
@@ -27,7 +28,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatIconModule,
     MatTooltipModule
   ],
-  providers: [NounService],
+  providers: [NounService, VerbService],
   bootstrap: [AppComponent],
 })
 export class AppModule { }
