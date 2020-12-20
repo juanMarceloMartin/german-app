@@ -27,7 +27,7 @@ router.get('/:level?/:qty?', (req: Request, res: Response) => {
   } else {
     if (!qty) {
       Noun.findAll({
-        where: { level: req.params.level },
+        where: { level },
       })
         .then((nouns: Noun[]) => { res.send(setNounsResponse(nouns)).json() })
         .catch((err: any) => res.send({ message: err }));
