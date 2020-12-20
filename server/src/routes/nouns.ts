@@ -5,8 +5,14 @@ const router = express.Router();
 const Noun = require('../models/Noun');
 
 router.get('/', (req: Request, res: Response) => {
-  Noun.findAll()
-    .then((nouns: Noun[]) => { res.send(setNounsResponse(nouns)).json() })
+  Noun.findAll({
+    attributes: {
+      exclude: ['createdAt', 'updatedAt', 'deletedAt'],
+    },
+  })
+    .then((nouns: Noun[]) => {
+      res.send(setNounsResponse(nouns)).json();
+    })
     .catch((err: any) => res.send({ message: err }));
 });
 
@@ -17,11 +23,15 @@ router.get('/:level?/:qty?', (req: Request, res: Response) => {
   if (level === 'all') {
     if (!qty) {
       Noun.findAll()
-        .then((nouns: Noun[]) => { res.send(setNounsResponse(nouns)).json() })
+        .then((nouns: Noun[]) => {
+          res.send(setNounsResponse(nouns)).json();
+        })
         .catch((err: any) => res.send({ message: err }));
     } else {
       Noun.findAll()
-        .then((nouns: Noun[]) => { res.send(setNounsResponse(nouns, qty)).json() })
+        .then((nouns: Noun[]) => {
+          res.send(setNounsResponse(nouns, qty)).json();
+        })
         .catch((err: any) => res.send({ message: err }));
     }
   } else {
@@ -29,13 +39,17 @@ router.get('/:level?/:qty?', (req: Request, res: Response) => {
       Noun.findAll({
         where: { level },
       })
-        .then((nouns: Noun[]) => { res.send(setNounsResponse(nouns)).json() })
+        .then((nouns: Noun[]) => {
+          res.send(setNounsResponse(nouns)).json();
+        })
         .catch((err: any) => res.send({ message: err }));
     } else {
       Noun.findAll({
         where: { level: req.params.level },
       })
-        .then((nouns: Noun[]) => { res.send(setNounsResponse(nouns, qty)).json() })
+        .then((nouns: Noun[]) => {
+          res.send(setNounsResponse(nouns, qty)).json();
+        })
         .catch((err: any) => res.send({ message: err }));
     }
   }

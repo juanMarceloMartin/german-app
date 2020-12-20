@@ -1,4 +1,5 @@
 import { Sequelize, Model, DataTypes } from 'sequelize';
+const Noun = require('./Noun');
 const sequelize = new Sequelize(
   `postgres://postgres:${process.env.DB_PASSWORD}@localhost:5432/german-app`
 );

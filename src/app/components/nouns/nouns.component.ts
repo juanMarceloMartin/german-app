@@ -20,6 +20,7 @@ export class NounsComponent implements OnInit {
   ngOnInit(): void {
     this._nounService.getNouns()
       .subscribe(data => {
+        console.log(data)
         this.dataSource = data;
         this.dataSource.forEach(noun => {
           this.articleAttempts[noun.id] = { attempt: 2, response: false };

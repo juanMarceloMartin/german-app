@@ -1,41 +1,44 @@
 import express, { Request, Response } from 'express';
-import { Op } from 'sequelize';
-import setNounsResponse from '../helpers/setNounsResponse';
+import sequelize, { Op } from 'sequelize';
 import Noun from '../interaces/noun';
-import Verb from '../interaces/verb';
+import Verb from '../models/Verb';
 const router = express.Router();
 const Noun = require('../models/Noun');
-const Verb = require('../models/Verb');
-const Vocabulary = require('../models/Vocabulary');
 
-router.get('/:input', (req: Request, res: Response) => {
-    Noun.findAll({
-        // where: {
-        //     [Op.or]: [
-        //         { noun: { [Op.like]: `%${req.params.input}` } },
-        //         { plural: { [Op.like]: `%${req.params.input}` } },
-        //         { translation: { [Op.like]: `%${req.params.input}` } },
-        //         { verb: { [Op.like]: `%${req.params.input}` } },
-        //         { participle: { [Op.like]: `%${req.params.input}` } },
-        //     ],
-        // },
-        where: {
-            [Op.or]: [
-                { noun: req.params.input },
-                { verb: req.params.input }
-            ]
+router.get('/noun/:input', (req: Request, res: Response) => {
+  const input = req.params.input.toLowerCase();
+  Noun.findAll({
+    where: {
+      [Op.or]: [
+        { noun: sequelize.where(sequelize.fn('lower', sequelize.col('noun')), 'like', `%${input}%`)},
+        { plural: sequelize.where(sequelize.fn('lower', sequelize.col('plural')), 'like', `%${input}%`) },
+        { translation: sequelize.where(sequelize.fn('lower', sequelize.col('translation')), 'like', `%${input}%`) }
+      ],
+    },
+    attributes: {
+      exclude: ['createdAt', 'updatedAt', 'deletedAt'],
+    }
+  })
+    .then((result: any) => res.send(result))
+    .catch((err: any) => res.send(err));
+});
 
-        },
-    })
-        .then((result: any) => {
-            if (result) {
-                res.send(result).json();
-            } else {
-                res.send({ status: "no result" })
-            }
-        })
-        .catch((err: any) => res.send(err))
-}
-);
+router.get('/verb/:input', (req: Request, res: Response) => {
+  const input = req.params.input.toLowerCase();
+  Verb.findAll({
+    where: {
+      [Op.or]: [
+        { verb: sequelize.where(sequelize.fn('lower', sequelize.col('verb')), 'like', `%${input}%`)},
+        { participle: sequelize.where(sequelize.fn('lower', sequelize.col('participle')), 'like', `%${input}%`) },
+        { translation: sequelize.where(sequelize.fn('lower', sequelize.col('translation')), 'like', `%${input}%`) }
+      ],
+    },
+    attributes: {
+      exclude: ['createdAt', 'updatedAt', 'deletedAt'],
+    }
+  })
+    .then((result: any) => res.send(result))
+    .catch((err: any) => res.send(err));
+});
 
 module.exports = router;
