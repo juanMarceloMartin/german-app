@@ -1,4 +1,7 @@
 <div class="wrapper">
-    <input type="text" class="input" placeholder="What are you looking for?">
-    <div class="searchbtn"><i class="fas fa-search"></i></div>
+    <input [(ngModel)]="userInput" type="text" class="input" placeholder="Was suchen Sie?">
+    <div (click)="searchForInput()" class="searchbtn"><mat-icon>search</mat-icon></div>
+</div>
+<div class="button-wrapper">
+    <button mat-raised-button color="warn">Spielen</button>
 </div>

@@ -5,7 +5,4 @@ export interface INoun {
     plural: string;
     translation: string;
     level: string;
-    createdAt: Date;
-    updatedAt: Date;
-    deletedAt: Date | null;
 }

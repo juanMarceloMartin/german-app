@@ -1,0 +1,52 @@
+<table *ngIf="nounSource.length" mat-table [dataSource]="nounSource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="article">
+        <th mat-header-cell *matHeaderCellDef> Artikel </th>
+        <td mat-cell *matCellDef="let element"> {{element.article}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="noun">
+        <th mat-header-cell *matHeaderCellDef> Sustantiven </th>
+        <td mat-cell *matCellDef="let element"> {{element.noun}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="plural">
+        <th mat-header-cell *matHeaderCellDef> Plural </th>
+        <td mat-cell *matCellDef="let element"> {{element.plural}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="translation">
+        <th mat-header-cell *matHeaderCellDef> Bedeutung </th>
+        <td mat-cell *matCellDef="let element"> {{element.translation}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="nounColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: nounColumns;"></tr>
+</table>
+
+<table *ngIf="verbSource.length" mat-table [dataSource]="verbSource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="verb">
+        <th mat-header-cell *matHeaderCellDef> Verben </th>
+        <td mat-cell *matCellDef="let element"> {{element.verb}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="auxiliary">
+        <th mat-header-cell *matHeaderCellDef> Auxiliar </th>
+        <td mat-cell *matCellDef="let element"> {{element.auxiliary}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="participle">
+        <th mat-header-cell *matHeaderCellDef> Partizip </th>
+        <td mat-cell *matCellDef="let element"> {{element.participle}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="translation">
+        <th mat-header-cell *matHeaderCellDef> Bedeutung </th>
+        <td mat-cell *matCellDef="let element"> {{element.translation}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="verbColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: verbColumns;"></tr>
+
+</table>
