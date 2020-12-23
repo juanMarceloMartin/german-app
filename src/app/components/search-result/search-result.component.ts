@@ -19,8 +19,8 @@ export class SearchResultComponent implements OnInit {
     this._searchService.userInput.subscribe(input => this.userInput = input);
 
     if (this.userInput) {
-      this._searchService.getNounResults(this.userInput).subscribe(nouns => this.nounSource = nouns)
-      this._searchService.getVerbResults(this.userInput).subscribe(verbs => this.verbSource = verbs)
+      this._searchService.getNounResults(this.userInput).subscribe(nouns => this.nounSource = nouns);
+      this._searchService.getVerbResults(this.userInput).subscribe(verbs => this.verbSource = verbs);
     }
   }
 
