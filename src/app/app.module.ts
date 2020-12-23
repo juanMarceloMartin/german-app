@@ -14,6 +14,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { NounService } from '../services/noun.service';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { VerbService } from 'src/services/verb.service';
 import { LandingComponent } from './components/landing/landing.component';
 import { SearchResultComponent } from './components/search-result/search-result.component';
@@ -31,7 +33,9 @@ import { SearchService } from 'src/services/search.service';
     MatInputModule,
     MatIconModule,
     MatTooltipModule,
-    MatButtonModule
+    MatButtonModule,
+    MatDialogModule,
+    MatToolbarModule
   ],
   providers: [NounService, VerbService, SearchService],
   bootstrap: [AppComponent],
