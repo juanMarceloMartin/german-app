@@ -39,6 +39,10 @@ Verb.init(
       type: new DataTypes.STRING(),
       allowNull: false,
     },
+    niveau: {
+      type: new DataTypes.STRING(),
+      allowNull: false,
+    },
     level: {
       type: new DataTypes.STRING(),
       allowNull: false,

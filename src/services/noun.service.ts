@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class NounService {
     
-    private _url: string = 'http://localhost:4201/nouns/A1.2/10';
+    private _url: string = 'http://localhost:4201/nouns/beginner/10';
 
     constructor(private http: HttpClient) { }
 
