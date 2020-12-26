@@ -2,13 +2,10 @@
     <mat-toolbar color="primary">
       <span>My App</span>
       <span class="spacer"></span>
-      <div style="position: relative; right: 40%;">
-        <input>
+      <div class="navbar-input">
+        <input (keyup.enter)="searchForInput()" [(ngModel)]="userInput" placeholder="Was suchen Sie?">
+        <mat-icon (click)="searchForInput()" class="search-icon">search</mat-icon>
       </div>
-      
-      <button mat-icon-button>
-        <mat-icon>play_circle_filled</mat-icon>
-      </button>
       <button mat-icon-button>
         <mat-icon>login</mat-icon>
       </button>

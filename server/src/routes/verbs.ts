@@ -4,55 +4,27 @@ import Verb from '../interaces/verb';
 const router = express.Router();
 const Verb = require('../models/Verb');
 
-router.get('/', (req: Request, res: Response) => {
-  Verb.findAll({
-    attributes: {
-      exclude: ['createdAt', 'updatedAt', 'deletedAt'],
-    },
-  })
-    .then((verbs: Verb[]) => res.send(setVerbsResponse(verbs)).json())
-    .catch((err: any) => res.send(err));
-});
-
 router.get('/:level?/:qty?', (req: Request, res: Response) => {
   const level = req.params.level;
-  const qty = parseInt(req.params.qty);
+  const qty = req.params.qty;
 
   if (level === 'all') {
-    if (!qty) {
-      Verb.findAll()
-        .then((Verbs: Verb[]) => {
-          res.send(setVerbsResponse(Verbs)).json();
+    Verb.findAll()
+        .then((verbs: Verb[]) => {
+          res.send(setVerbsResponse(verbs, qty)).json();
         })
         .catch((err: any) => res.send({ message: err }));
-    } else {
-      Verb.findAll()
-        .then((Verbs: Verb[]) => {
-          res.send(setVerbsResponse(Verbs, qty)).json();
-        })
-        .catch((err: any) => res.send({ message: err }));
-    }
   } else {
-    if (!qty) {
-      Verb.findAll({
-        where: { level },
-        attributes: {
-          exclude: ['createdAt', 'updatedAt', 'deletedAt'],
-        },
+    Verb.findAll({
+      where: { level },
+      attributes: {
+        exclude: ['createdAt', 'updatedAt', 'deletedAt'],
+      },
+    })
+      .then((verbs: Verb[]) => {
+        res.send(setVerbsResponse(verbs, qty)).json();
       })
-        .then((Verbs: Verb[]) => {
-          res.send(setVerbsResponse(Verbs)).json();
-        })
-        .catch((err: any) => res.send({ message: err }));
-    } else {
-      Verb.findAll({
-        where: { level: req.params.level },
-      })
-        .then((Verbs: Verb[]) => {
-          res.send(setVerbsResponse(Verbs, qty)).json();
-        })
-        .catch((err: any) => res.send({ message: err }));
-    }
+      .catch((err: any) => res.send({ message: err }));
   }
 });
 

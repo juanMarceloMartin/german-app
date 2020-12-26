@@ -1,9 +1,6 @@
-import Noun from "../interaces/noun";
-import Verb from "../interaces/verb";
-
-export default function removeDuplicateEntries(data: Noun[] | Verb[], qty: number) {
+export default function removeDuplicateEntries(data: any, qty: number) {
     const indexes: number[] = [];
-    data.forEach((element: Noun | Verb) => indexes.push(element.id));
+    data.forEach((element: any) => indexes.push(element.dataValues.id));
     const randomIndex: number[] = [];
 
     for (let i = 0; i < qty; i++) {
@@ -11,6 +8,5 @@ export default function removeDuplicateEntries(data: Noun[] | Verb[], qty: numbe
         randomIndex.push(index);
         indexes.splice(indexes.indexOf(index), 1);
     }
-
-    return indexes;
+    return randomIndex;
 }

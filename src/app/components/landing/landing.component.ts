@@ -1,23 +1,34 @@
 import { Component, OnInit } from '@angular/core';
-import { SearchService } from 'src/services/search.service';
+import { GameOptionsService } from 'src/services/game-options.service';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-landing',
   templateUrl: './landing.component.html',
-  styleUrls: ['./landing.component.css']
+  styleUrls: ['./landing.component.css'],
 })
 export class LandingComponent implements OnInit {
-  userInput = '';
+  match = {
+    game: '',
+    qty: '',
+    level: '',
+  };
 
-  constructor(private _searchService: SearchService, private router: Router) { }
+  constructor(
+    private router: Router,
+    private _gameOptions: GameOptionsService
+  ) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  setGameOptions(choice: string, e: any) {
+    this.match[choice] = e.value;
   }
 
-  searchForInput() {
-    this._searchService.updateUserInput(this.userInput);
-    this.router.navigateByUrl('/search-result');
+  goToGame() {
+    if (this.match.game && this.match.qty && this.match.level) {
+      this._gameOptions.setGameOptions(this.match);
+      this.router.navigateByUrl(`/${this.match.game}`);
+    }
   }
-
 }

@@ -1,21 +1,25 @@
 import NounResponse from '../interaces/noun-response';
-import Noun from '../models/Noun';
 import removeDuplicateEntries from './removeDuplicateEntries';
 
 export default function setNounsResponse(
   data: any,
-  qty = 0
+  qty: string
 ): NounResponse[] {
   let result: NounResponse[] = [];
 
-  if (!qty) {
+  if (qty === 'all') {
     data.forEach((noun: any) => {
-      const entry: NounResponse = { ...noun.dataValues, articleInput: '', pluralInput: '' };
+      const entry: NounResponse = {
+        ...noun.dataValues,
+        articleInput: '',
+        pluralInput: '',
+      };
       result.push(entry);
     });
   } else {
-    const indexArray = removeDuplicateEntries(data, qty);
-    for (let i = 0; i < qty; i++) {
+    const quantity = parseInt(qty);
+    const indexArray = removeDuplicateEntries(data, quantity);
+    for (let i = 0; i < quantity; i++) {
       const entry: NounResponse = {
         ...data[indexArray[i]].dataValues,
         articleInput: '',

@@ -16,13 +16,24 @@ import { NounService } from '../services/noun.service';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatRadioModule } from '@angular/material/radio';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatGridListModule } from '@angular/material/grid-list';
 import { VerbService } from 'src/services/verb.service';
 import { LandingComponent } from './components/landing/landing.component';
 import { SearchResultComponent } from './components/search-result/search-result.component';
 import { SearchService } from 'src/services/search.service';
+import { GameOptionsService } from 'src/services/game-options.service';
 
 @NgModule({
-  declarations: [AppComponent, NounsComponent, VerbsComponent, LandingComponent, SearchResultComponent],
+  declarations: [
+    AppComponent,
+    NounsComponent,
+    VerbsComponent,
+    LandingComponent,
+    SearchResultComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -35,9 +46,13 @@ import { SearchService } from 'src/services/search.service';
     MatTooltipModule,
     MatButtonModule,
     MatDialogModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatFormFieldModule,
+    MatRadioModule,
+    ReactiveFormsModule,
+    MatGridListModule
   ],
-  providers: [NounService, VerbService, SearchService],
+  providers: [NounService, VerbService, SearchService, GameOptionsService],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

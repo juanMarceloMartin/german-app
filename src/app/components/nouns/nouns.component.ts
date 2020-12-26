@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { INoun } from 'src/interfaces/noun';
-import { NounService } from '../../../services/noun.service';
+import { GameOptionsService } from '../../../services/game-options.service';
 
 @Component({
   selector: 'app-nouns',
@@ -10,29 +9,30 @@ import { NounService } from '../../../services/noun.service';
 })
 export class NounsComponent implements OnInit {
   displayedColumns: string[] = ['noun', 'articleInput', 'pluralInput'];
-  dataSource: INoun[];
+  dataSource: any;
   articleAttempts: {} = {};
   pluralAttempts: {} = {};
 
-  constructor(private _nounService: NounService) {
-  }
+  constructor(private _gameOptionsService: GameOptionsService) {}
 
   ngOnInit(): void {
-    this._nounService.getNouns()
-      .subscribe(data => {
-        console.log(data)
+    this._gameOptionsService.gameOptions.subscribe((gameItems) => {
+      this._gameOptionsService.getGameItems(gameItems.game, gameItems.level, gameItems.qty).subscribe((data) => {
         this.dataSource = data;
-        this.dataSource.forEach(noun => {
+        this.dataSource.forEach((noun) => {
           this.articleAttempts[noun.id] = { attempt: 2, response: false };
           this.pluralAttempts[noun.id] = { attempt: 3, response: false };
-        })
-      })
+        });
+      });
+    });
   }
 
   checkArticle(id: number, solution: string, input: string) {
     if (input) {
       if (solution.toLocaleLowerCase() !== input.toLocaleLowerCase()) {
-        id > 0 && this.articleAttempts[id].attempt > 0 ? this.articleAttempts[id].attempt-- : null;
+        id > 0 && this.articleAttempts[id].attempt > 0
+          ? this.articleAttempts[id].attempt--
+          : null;
         this.articleAttempts[id].response = false;
       } else {
         this.articleAttempts[id].response = true;
@@ -43,12 +43,13 @@ export class NounsComponent implements OnInit {
   checkPlural(id: number, solution: string, input: string) {
     if (input) {
       if (solution.toLocaleLowerCase() !== input.toLocaleLowerCase()) {
-        id > 0 && this.pluralAttempts[id].attempt ? this.pluralAttempts[id].attempt-- : null;
+        id > 0 && this.pluralAttempts[id].attempt
+          ? this.pluralAttempts[id].attempt--
+          : null;
         this.pluralAttempts[id].response = false;
       } else {
         this.pluralAttempts[id].response = true;
       }
     }
   }
-
 }

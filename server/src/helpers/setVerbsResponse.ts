@@ -3,11 +3,11 @@ import removeDuplicateEntries from './removeDuplicateEntries';
 
 export default function setVerbsResponse(
   data: any,
-  qty = 0
+  qty: string
 ): VerbResponse[] {
   let result: VerbResponse[] = [];
 
-  if (!qty) {
+  if (qty === 'all') {
     data.forEach((verb: any) => {
       const entry: VerbResponse = {
         ...verb.dataValues,
@@ -17,13 +17,14 @@ export default function setVerbsResponse(
       result.push(entry);
     });
   } else {
-    const indexArray = removeDuplicateEntries(data, qty);
-    for (let i = 0; i < qty; i++) {
+    const quantity = parseInt(qty);
+    const indexArray = removeDuplicateEntries(data, quantity);
+    for (let i = 0; i < quantity; i++) {
       const entry: VerbResponse = {
         ...data[indexArray[i]].dataValues,
         auxiliaryInput: '',
-        participleInput: ''
-      }
+        participleInput: '',
+      };
       result.push(entry);
     }
   }
