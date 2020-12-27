@@ -52,4 +52,6 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
-<button>Check</button>
+<div class="form-button">
+  <button (keyup.enter)="showResult()" (click)="showResult()" mat-raised-button color="primary">Siehe Ergebnis</button>
+</div>

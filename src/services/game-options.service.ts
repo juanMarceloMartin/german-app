@@ -25,7 +25,11 @@ export class GameOptionsService {
 
   constructor(private http: HttpClient) {}
 
-  getGameItems(element: string, level: string, qty: string): Observable<INoun[] | IVerb[]> {
+  getGameItems(
+    element: string,
+    level: string,
+    qty: string
+  ): Observable<INoun[] | IVerb[]> {
     const url = `${this._url}${element}/${level}/${qty}`;
     return this.http.get<INoun[] | IVerb[]>(url);
   }

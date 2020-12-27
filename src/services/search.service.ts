@@ -6,25 +6,37 @@ import { IVerb } from 'src/interfaces/verb';
 
 @Injectable()
 export class SearchService {
+  private userInputSource = new BehaviorSubject<string>('');
+  userInput = this.userInputSource.asObservable();
 
-    private userInputSource = new BehaviorSubject<string>('');
-    userInput = this.userInputSource.asObservable();
+  private nounSearchSource = new BehaviorSubject<INoun[]>([]);
+  nounSearch = this.nounSearchSource.asObservable();
 
-    private _nounsUrl: string = 'http://localhost:4201/search/noun/';
-    private _verbsUrl: string = 'http://localhost:4201/search/verb/';
+  private verbSearchSource = new BehaviorSubject<IVerb[]>([]);
+  verbSearch = this.verbSearchSource.asObservable();
 
-    constructor(private http: HttpClient) { }
+  private _nounsUrl: string = 'http://localhost:4201/search/noun/';
+  private _verbsUrl: string = 'http://localhost:4201/search/verb/';
 
-    getNounResults(input: string): Observable<INoun[]> {
-        return this.http.get<INoun[]>(`${this._nounsUrl}${input}`);
-    }
+  constructor(private http: HttpClient) {}
 
-    getVerbResults(input: string): Observable<IVerb[]> {
-        return this.http.get<IVerb[]>(`${this._verbsUrl}${input}`);
-    }
+  getNounResults(input: string): Observable<INoun[]> {
+    return this.http.get<INoun[]>(`${this._nounsUrl}${input}`);
+  }
 
-    updateUserInput(input: string) {
-        this.userInputSource.next(input);
-    }
+  getVerbResults(input: string): Observable<IVerb[]> {
+    return this.http.get<IVerb[]>(`${this._verbsUrl}${input}`);
+  }
 
-};
+  updateUserInput(input: string) {
+    this.userInputSource.next(input);
+  }
+
+  setNounResults(nounSearchResult: INoun[]) {
+    this.nounSearchSource.next(nounSearchResult);
+  }
+
+  setVerbResults(verbSearchResult: IVerb[]) {
+    this.verbSearchSource.next(verbSearchResult);
+  }
+}

@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { GameOptionsService } from '../../../services/game-options.service';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { GameResultComponent } from '../game-result/game-result.component';
 
 @Component({
   selector: 'app-nouns',
@@ -13,17 +15,22 @@ export class NounsComponent implements OnInit {
   articleAttempts: {} = {};
   pluralAttempts: {} = {};
 
-  constructor(private _gameOptionsService: GameOptionsService) {}
+  constructor(
+    private _gameOptionsService: GameOptionsService,
+    public dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     this._gameOptionsService.gameOptions.subscribe((gameItems) => {
-      this._gameOptionsService.getGameItems(gameItems.game, gameItems.level, gameItems.qty).subscribe((data) => {
-        this.dataSource = data;
-        this.dataSource.forEach((noun) => {
-          this.articleAttempts[noun.id] = { attempt: 2, response: false };
-          this.pluralAttempts[noun.id] = { attempt: 3, response: false };
+      this._gameOptionsService
+        .getGameItems(gameItems.game, gameItems.level, gameItems.qty)
+        .subscribe((data) => {
+          this.dataSource = data;
+          this.dataSource.forEach((noun) => {
+            this.articleAttempts[noun.id] = { attempt: 2, response: false };
+            this.pluralAttempts[noun.id] = { attempt: 3, response: false };
+          });
         });
-      });
     });
   }
 
@@ -51,5 +58,53 @@ export class NounsComponent implements OnInit {
         this.pluralAttempts[id].response = true;
       }
     }
+  }
+
+  showResult() {
+    const perfectScore = this.dataSource.length;
+    let usersScore = 0;
+
+    this.dataSource.forEach((noun) => {
+      if (
+        noun.article.toLocaleLowerCase() ===
+        noun.articleInput.toLocaleLowerCase()
+      ) {
+        usersScore += 0.5;
+      }
+
+      if (noun.plural === noun.pluralInput) {
+        usersScore += 0.5;
+      }
+    });
+
+    const result = (usersScore / perfectScore) * 100;
+
+    let message = '';
+    let resultColor = { color: '' };
+
+    if (result < 40) {
+      message = 'Was ist passiert main Freund??';
+      resultColor.color = 'red';
+    } else if (result < 70) {
+      message = 'jah, nicht so schlecht...';
+      resultColor.color = 'yellow';
+    } else if (result < 90) {
+      message = 'Sehr Gut!!';
+      resultColor.color = 'green';
+    } else if (result < 100) {
+      message = 'Wunderbar!!';
+      resultColor.color = 'green';
+    } else {
+      message = 'Perfekt!!';
+      resultColor.color = 'green';
+    }
+
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = { result, message, resultColor };
+    dialogConfig.height = '65%';
+    dialogConfig.width = '30%';
+
+    this.dialog.open(GameResultComponent, dialogConfig);
+    this.ngOnInit();
   }
 }

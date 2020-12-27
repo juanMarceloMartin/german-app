@@ -25,6 +25,8 @@ import { LandingComponent } from './components/landing/landing.component';
 import { SearchResultComponent } from './components/search-result/search-result.component';
 import { SearchService } from 'src/services/search.service';
 import { GameOptionsService } from 'src/services/game-options.service';
+import { GameResultComponent } from './components/game-result/game-result.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,10 @@ import { GameOptionsService } from 'src/services/game-options.service';
     VerbsComponent,
     LandingComponent,
     SearchResultComponent,
+    GameResultComponent,
+    NavbarComponent,
   ],
+  entryComponents: [GameResultComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

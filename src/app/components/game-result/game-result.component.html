@@ -1,0 +1,12 @@
+<h2 mat-dialog-title>Ergebnis: </h2>
+<mat-dialog-content>
+    <div class="result" style="{{data.resultColor}}">
+        {{data.result}}%
+    </div>
+    <div class="result-text">
+        {{data.message}}
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions class="form-button">
+    <button  mat-dialog-close mat-raised-button color="primary" [routerLink]="['/']" >Home</button>
+</mat-dialog-actions>
