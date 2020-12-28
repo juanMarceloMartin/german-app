@@ -40,12 +40,12 @@ table {
   }
   
   .tooltip {
-    font-size: large;
+    font-size: large !important;
   }
 
   .tooltip-red {
-    font-size: large;
-    background-color: #FF0000;
+    font-size: large !important;
+    background-color: #FF0000 !important;
   }
   
   th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
