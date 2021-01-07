@@ -30,4 +30,8 @@ export class NavbarComponent implements OnInit {
     });
     this.router.navigateByUrl('/search-result');
   }
+
+  resetInput() {
+    this.userInput = '';
+  }
 }

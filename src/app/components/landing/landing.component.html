@@ -1,53 +1,49 @@
-<div class="landing-title">
-    <div>
-        <h1>Mit diesem Spiel kannst du:</h1>
-        <ul>
-            <li>Lerne das Geschlecht und den Plural jedes Substantivs. 
-                Sie haben 2 Chancen, um das Geschlecht und 3 für den Plural anzupassen
-            </li>
-            <li>
-                Lerne das Hilfsmittel und die Konjugation der Vergangenheit einfach von jedem Verb. 
-                Sie haben eine Chance, das Hilfsmittel und 3, um das Partizip zu entsprechen.
-            </li>
-        </ul>
-        <p>
-            Wähle deine Optionen und starte das Spiel
-        </p>
-    </div>    
-</div>
 <div class="landing-form">
     <div class="form-container">
-        <form>
-            <h2>Optionen</h2>
+        <form class="box-shadow">
+            <div class="title-div">
+                <h2>Optionen</h2>
+            </div>
             <div class="form-item">
-                <label>Art des Spiels: </label><br>
+                <div class="label-div">
+                    <label>Art des Spiels: </label>
+                </div>
                 <mat-radio-group>
-                  <mat-radio-button (change)="setGameOptions('game', $event)" value="nouns">Sustantive</mat-radio-button>
-                  <mat-radio-button (change)="setGameOptions('game', $event)" value="verbs">Verben</mat-radio-button>
+                    <mat-radio-button (change)="setGameOptions('game', $event)" value="nouns">Sustantive
+                    </mat-radio-button>
+                    <mat-radio-button (change)="setGameOptions('game', $event)" value="verbs">Verben</mat-radio-button>
                 </mat-radio-group>
-              </div>
-              <div class="form-item">
-                <label>Quantität: </label><br>
-                <mat-radio-group>
-                  <mat-radio-button (change)="setGameOptions('qty', $event)" value="5">5</mat-radio-button>
-                  <mat-radio-button (change)="setGameOptions('qty', $event)" value="10">10</mat-radio-button>
-                  <mat-radio-button (change)="setGameOptions('qty', $event)" value="15">15</mat-radio-button>
-                  <mat-radio-button (change)="setGameOptions('qty', $event)" value="all">Alles</mat-radio-button>
-                </mat-radio-group>
-              </div>
+            </div>
             <div class="form-item">
-                <label>Niveau: </label><br>
+                <div class="label-div">
+                    <label>Quantität: </label>
+                </div>
                 <mat-radio-group>
-                <mat-radio-button (change)="setGameOptions('level', $event)" value="beginner">Anfänger</mat-radio-button>
-                <mat-radio-button (change)="setGameOptions('level', $event)" value="intermediate">Mittlere</mat-radio-button>
-                <mat-radio-button (change)="setGameOptions('level', $event)" value="advanced">Fortgeschritten</mat-radio-button>
-                <mat-radio-button (change)="setGameOptions('level', $event)" value="all">Alles</mat-radio-button>
+                    <mat-radio-button (change)="setGameOptions('qty', $event)" value="5">5</mat-radio-button>
+                    <mat-radio-button (change)="setGameOptions('qty', $event)" value="10">10</mat-radio-button>
+                    <mat-radio-button (change)="setGameOptions('qty', $event)" value="15">15</mat-radio-button>
+                    <mat-radio-button (change)="setGameOptions('qty', $event)" value="all">Alles</mat-radio-button>
+                </mat-radio-group>
+            </div>
+            <div class="form-item">
+                <div class="label-div">
+                    <label>Niveau: </label>
+                </div>
+                <mat-radio-group>
+                    <mat-radio-button (change)="setGameOptions('level', $event)" value="beginner">Anfänger
+                    </mat-radio-button>
+                    <mat-radio-button (change)="setGameOptions('level', $event)" value="intermediate">Mittlere
+                    </mat-radio-button>
+                    <mat-radio-button (change)="setGameOptions('level', $event)" value="advanced">Fortgeschritten
+                    </mat-radio-button>
+                    <mat-radio-button (change)="setGameOptions('level', $event)" value="all">Alles</mat-radio-button>
                 </mat-radio-group>
             </div>
             <div class="form-button">
-                <button (keyup.enter)="goToGame()" (click)="goToGame()" mat-raised-button color="primary">Spielen</button>
+                <button (keyup.enter)="goToGame()" (click)="goToGame()" mat-raised-button
+                    color="primary">Spielen</button>
             </div>
         </form>
-      </div>
+    </div>
 
 </div>

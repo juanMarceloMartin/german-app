@@ -18,7 +18,7 @@ export class NounsComponent implements OnInit {
   constructor(
     private _gameOptionsService: GameOptionsService,
     public dialog: MatDialog
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this._gameOptionsService.gameOptions.subscribe((gameItems) => {
@@ -58,6 +58,7 @@ export class NounsComponent implements OnInit {
         this.pluralAttempts[id].response = true;
       }
     }
+    console.log(this.pluralAttempts[id].response)
   }
 
   showResult() {
@@ -107,4 +108,21 @@ export class NounsComponent implements OnInit {
     this.dialog.open(GameResultComponent, dialogConfig);
     this.ngOnInit();
   }
+
+  check(e: any, i: any, d: any) {
+    console.log(d);
+    console.log(e === i)
+  }
+
+  checkNoun(id: number, article: string, articleInput: string, plural: string, pluralInput: string) {
+    if (articleInput) {
+      this.checkArticle(id, article, articleInput)
+    };
+
+    if (pluralInput) {
+      this.checkPlural(id, plural, pluralInput)
+    };
+  }
+
+
 }

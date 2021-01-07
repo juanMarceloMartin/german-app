@@ -1,10 +1,10 @@
 .navbar-input {
     position: relative; 
-    right: 35%;
-    width: 30%;
+    right: 34.5%;
+    width: 490px;
     background-color: white;
-    border-radius: 4px;
-    padding-left: 5px;
+    border-radius: 100px;
+    padding-left: 20px;
     padding-bottom: 2px;
 }
 
@@ -22,4 +22,91 @@ input {
 
 .app-logo {
     cursor: pointer;
+}
+
+@media (max-width: 1680px) {
+    .navbar-input {
+        right: 32%;
+    }
+}
+
+@media (max-width: 1600px) {
+    .navbar-input {
+        right: 31%;
+    }
+}
+
+@media (max-width: 1400px) {
+    .navbar-input {
+        right: 29%;
+    }
+}
+
+
+@media (max-width: 1280px) {
+    .navbar-input {
+        right: 27%;
+    }
+}
+
+@media (max-width: 1024px) {
+    .navbar-input {
+        right: 22%;
+    }
+}
+
+
+@media (max-width: 962px) {
+    .navbar-input {
+        right: 18%;
+    }
+}
+
+@media (max-width: 834px) {
+    .navbar-input {
+        right: 14%;
+    }
+}
+
+
+@media (max-width: 800px) {
+    .navbar-input {
+        right: 12%;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar-input {
+        right: 10%;
+    }
+}
+
+@media (max-width: 640px) {
+    .navbar-input {
+        right: 5%;
+        width: 410px;
+    }
+}
+
+
+@media (max-width: 480px) {
+    .navbar-input {
+        right: 5%;
+        width: 240px;
+    }
+
+    input {
+        width: 87%;
+    }
+}
+
+@media (max-width: 360px) {
+    .navbar-input {
+        right: 9%;
+        width: 175px;
+    }
+
+    input {
+        width: 85%
+    }
 }

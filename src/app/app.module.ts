@@ -19,7 +19,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatRadioModule } from '@angular/material/radio';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatGridListModule } from '@angular/material/grid-list';
 import { VerbService } from 'src/services/verb.service';
 import { LandingComponent } from './components/landing/landing.component';
 import { SearchResultComponent } from './components/search-result/search-result.component';
@@ -54,10 +53,9 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     MatToolbarModule,
     MatFormFieldModule,
     MatRadioModule,
-    ReactiveFormsModule,
-    MatGridListModule
+    ReactiveFormsModule
   ],
   providers: [NounService, VerbService, SearchService, GameOptionsService],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

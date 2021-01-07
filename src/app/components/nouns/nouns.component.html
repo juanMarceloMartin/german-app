@@ -1,57 +1,129 @@
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<div class="table-container non-mobile">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-  <ng-container matColumnDef="noun">
-    <th mat-header-cell *matHeaderCellDef> Substantiv </th>
-    <td mat-cell *matCellDef="let element" matTooltip="{{element.translation}}" matTooltipPosition="above"
-      matTooltipClass="tooltip">
-      {{element.noun}} </td>
-  </ng-container>
+    <ng-container matColumnDef="noun">
+      <th mat-header-cell *matHeaderCellDef> Substantiv </th>
+      <td mat-cell *matCellDef="let element" matTooltip="{{element.translation}}" matTooltipPosition="above"
+        matTooltipClass="tooltip">
+        {{element.noun}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="articleInput">
-    <th mat-header-cell *matHeaderCellDef> Die, Der oder Das? </th>
-    <td mat-cell *matCellDef="let element">
-      <mat-form-field class="example-full-width">
-        <input readonly="{{!articleAttempts[element.id].attempt}}" matInput [(ngModel)]="element.articleInput"
-          (blur)="checkArticle(element.id, element.article, element.articleInput)">
-        <mat-icon *ngIf="articleAttempts[element.id].response; else wrong" matSuffix class="correct">done</mat-icon>
-        <ng-template #wrong>
-          <mat-icon *ngIf="articleAttempts[element.id].attempt === 1; else finished" matSuffix class="wrong"
-            matTooltip="+ {{articleAttempts[element.id].attempt}}" matTooltipPosition="above"
-            matTooltipClass="tooltip-red">error
-          </mat-icon>
-          <ng-template #finished>
-            <mat-icon *ngIf="!articleAttempts[element.id].attempt" matSuffix class="wrong"
-            matTooltipPosition="above" matTooltip="{{element.article}}" matTooltipClass="tooltip-red">close</mat-icon>
+    <ng-container matColumnDef="articleInput">
+      <th mat-header-cell *matHeaderCellDef> Die, Der oder Das? </th>
+      <td mat-cell *matCellDef="let element">
+        <mat-form-field class="form-width">
+          <input readonly="{{!articleAttempts[element.id].attempt}}" matInput [(ngModel)]="element.articleInput"
+            (blur)="checkArticle(element.id, element.article, element.articleInput)">
+          <mat-icon *ngIf="articleAttempts[element.id].response; else wrong" matSuffix class="correct">done</mat-icon>
+          <ng-template #wrong>
+            <mat-icon *ngIf="articleAttempts[element.id].attempt === 1; else finished" matSuffix class="wrong"
+              matTooltip="+ {{articleAttempts[element.id].attempt}}" matTooltipPosition="above"
+              matTooltipClass="tooltip-red">error
+            </mat-icon>
+            <ng-template #finished>
+              <mat-icon *ngIf="!articleAttempts[element.id].attempt" matSuffix class="wrong" matTooltipPosition="above"
+                matTooltip="{{element.article}}" matTooltipClass="tooltip-red">close</mat-icon>
+            </ng-template>
           </ng-template>
-        </ng-template>
-      </mat-form-field>
-    </td>
-  </ng-container>
+        </mat-form-field>
+      </td>
+    </ng-container>
 
-  <ng-container matColumnDef="pluralInput">
-    <th mat-header-cell *matHeaderCellDef> Plural</th>
-    <td mat-cell *matCellDef="let element">
-      <mat-form-field class="example-full-width">
-        <input readonly="{{!pluralAttempts[element.id].attempt}}" matInput [(ngModel)]="element.pluralInput"
-          (blur)="checkPlural(element.id, element.plural, element.pluralInput)">
-        <mat-icon *ngIf="pluralAttempts[element.id].response; else wrong" matSuffix class="correct">done</mat-icon>
-        <ng-template #wrong>
-          <mat-icon *ngIf="pluralAttempts[element.id].attempt && pluralAttempts[element.id].attempt < 3; else finished"
-            matSuffix class="wrong" matTooltip="+ {{pluralAttempts[element.id].attempt}}" matTooltipPosition="above"
-            matTooltipClass="tooltip-red">error
-          </mat-icon>
-          <ng-template #finished>
+    <ng-container matColumnDef="pluralInput">
+      <th mat-header-cell *matHeaderCellDef> Plural</th>
+      <td mat-cell *matCellDef="let element">
+        <mat-form-field class="form-width">
+          <input readonly="{{!pluralAttempts[element.id].attempt}}" matInput [(ngModel)]="element.pluralInput"
+            (blur)="checkPlural(element.id, element.plural, element.pluralInput)">
+          <mat-icon *ngIf="pluralAttempts[element.id].response; else wrong" matSuffix class="correct">done</mat-icon>
+          <ng-template #wrong>
+            <mat-icon
+              *ngIf="pluralAttempts[element.id].attempt && pluralAttempts[element.id].attempt < 3; else finished"
+              matSuffix class="wrong" matTooltip="+ {{pluralAttempts[element.id].attempt}}" matTooltipPosition="above"
+              matTooltipClass="tooltip-red">error
+            </mat-icon>
+            <ng-template #finished>
+              <mat-icon *ngIf="!pluralAttempts[element.id].attempt" matSuffix class="wrong"
+                matTooltip="{{element.plural}}" matTooltipPosition="above" matTooltipClass="tooltip-red">close
+              </mat-icon>
+            </ng-template>
+          </ng-template>
+        </mat-form-field>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <div class="form-button">
+    <button (keyup.enter)="showResult()" (click)="showResult()" mat-raised-button color="primary">Siehe
+      Ergebnis</button>
+  </div>
+</div>
+
+<div class="mobile">
+  <div *ngFor="let element of dataSource" class="landing-form">
+    <div class="element-container">
+      <form class="element-form box-shadow">
+        <div class="title-div">
+          <h2 matTooltip="{{element.translation}}" matTooltipPosition="above" matTooltipClass="tooltip">{{element.noun}}
+          </h2>
+        </div>
+        <div class="form-item">
+          <div class="label-div">
+            <label>Artikel: </label>
+          </div>
+          <mat-radio-group>
+            <mat-radio-button disabled="{{!articleAttempts[element.id].attempt}}" value="Die"
+              [(ngModel)]="element.articleInput" [ngModelOptions]="{standalone: true}" name="article" ngDefaultControl>
+              Die
+            </mat-radio-button>
+            <mat-radio-button disabled="{{!articleAttempts[element.id].attempt}}" value="Der"
+              [(ngModel)]="element.articleInput" [ngModelOptions]="{standalone: true}" name="article" ngDefaultControl>
+              Der
+            </mat-radio-button>
+            <mat-radio-button disabled="{{!articleAttempts[element.id].attempt}}" value="Das"
+              [(ngModel)]="element.articleInput" [ngModelOptions]="{standalone: true}" name="article" ngDefaultControl>
+              Das
+            </mat-radio-button>
+          </mat-radio-group>
+          <mat-icon *ngIf="articleAttempts[element.id].response; else wrong" matSuffix class="correct">done</mat-icon>
+          <ng-template #wrong>
+            <mat-icon *ngIf="articleAttempts[element.id].attempt === 1; else finished" matSuffix class="wrong"
+              matTooltip="+ {{articleAttempts[element.id].attempt}}" matTooltipPosition="above"
+              matTooltipClass="tooltip-red">error
+            </mat-icon>
+            <ng-template #finished>
+              <mat-icon *ngIf="!articleAttempts[element.id].attempt" matSuffix class="wrong" matTooltipPosition="above"
+                matTooltip="{{element.article}}" matTooltipClass="tooltip-red">close</mat-icon>
+            </ng-template>
+          </ng-template>
+        </div>
+        <div class="form-item">
+          <mat-form-field class="form-width">
+            <mat-label>Plural</mat-label>
+            <input readonly="{{!pluralAttempts[element.id].attempt}}" matInput [(ngModel)]="element.pluralInput"
+              [ngModelOptions]="{standalone: true}" name="plural" ngDefaultControl>
+            <mat-icon *ngIf="pluralAttempts[element.id].response; else wrong" matSuffix class="correct">done</mat-icon>
+            <mat-icon
+              *ngIf="pluralAttempts[element.id].attempt && pluralAttempts[element.id].attempt < 3 && !pluralAttempts[element.id].response"
+              matSuffix class="wrong" matTooltip="+ {{pluralAttempts[element.id].attempt}}" matTooltipPosition="above"
+              matTooltipClass="tooltip-red">error
+            </mat-icon>
             <mat-icon *ngIf="!pluralAttempts[element.id].attempt" matSuffix class="wrong"
-              matTooltip="{{element.plural}}" matTooltipPosition="above" matTooltipClass="tooltip-red">close</mat-icon>
-          </ng-template>
-        </ng-template>
-      </mat-form-field>
-    </td>
-  </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
-<div class="form-button">
-  <button (keyup.enter)="showResult()" (click)="showResult()" mat-raised-button color="primary">Siehe Ergebnis</button>
+              matTooltip="{{element.plural}}" matTooltipPosition="above" matTooltipClass="tooltip-red">close
+            </mat-icon>
+          </mat-form-field>
+        </div>
+        <div class="form-button">
+          <button mat-raised-button color="primary"
+            (click)="checkNoun(element.id, element.article, element.articleInput, element.plural, element.pluralInput)">Spielen</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div style="padding-bottom: 50px;" class="form-button">
+    <button (keyup.enter)="showResult()" (click)="showResult()" mat-raised-button color="primary">Siehe
+      Ergebnis</button>
+  </div>
 </div>

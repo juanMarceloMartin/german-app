@@ -3,3 +3,54 @@
     align-items: center;
     justify-content: center;
 }
+
+
+.element-container {
+    margin-top: 2%;
+    padding: 50px 20px;
+    font-size: larger;
+  }
+
+    
+   
+    .element-container .mat-radio-button {
+      margin: 0 12px;
+    }
+  
+  .element-form {
+      padding: 10px;
+      border-radius: 20px;
+      background: white;
+  }
+  
+  .label-div {
+    margin-bottom: 20px;
+  }
+  
+  .title-div {
+      text-align: center;
+      margin-bottom: 5px;
+      text-transform: uppercase;
+  
+  }
+  
+  .form-item {
+      margin-bottom: 40px !important;
+  }
+  
+  .form-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  }
+  
+  .landing-form {
+      display: flex;
+      justify-content: center;
+  }
+
+  .element-full-width {
+      width: 102%;
+  }
+  
+  

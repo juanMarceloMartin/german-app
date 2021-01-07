@@ -1,54 +1,119 @@
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<div class="table-container non-mobile">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-  <ng-container matColumnDef="verb">
-    <th mat-header-cell *matHeaderCellDef> Verb </th>
-    <td mat-cell *matCellDef="let element" matTooltip="{{element.translation}}" matTooltipPosition="above"
-      matTooltipClass="tooltip">
-      {{element.verb}} </td>
-  </ng-container>
+    <ng-container matColumnDef="verb">
+      <th mat-header-cell *matHeaderCellDef> Verb </th>
+      <td mat-cell *matCellDef="let element" matTooltip="{{element.translation}}" matTooltipPosition="above"
+        matTooltipClass="tooltip">
+        {{element.verb}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="auxiliaryInput">
-    <th mat-header-cell *matHeaderCellDef> Haben oder Sein? </th>
-    <td mat-cell *matCellDef="let element">
-      <mat-form-field class="example-full-width">
-        <input readonly="{{!auxiliaryAttempts[element.id].attempt}}" matInput [(ngModel)]="element.auxiliaryInput"
-          (blur)="checkAuxiliary(element.id, element.auxiliary, element.auxiliaryInput)">
-        <mat-icon *ngIf="auxiliaryAttempts[element.id].response; else wrong" matSuffix class="correct">done</mat-icon>
-        <ng-template #wrong>
-          <mat-icon *ngIf="!auxiliaryAttempts[element.id].attempt" matSuffix class="wrong" matTooltipPosition="above"
-            matTooltip="{{element.auxiliary}}" matTooltipClass="tooltip-red">close</mat-icon>
-        </ng-template>
-      </mat-form-field>
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="auxiliaryInput">
+      <th mat-header-cell *matHeaderCellDef> Haben oder Sein? </th>
+      <td mat-cell *matCellDef="let element">
+        <mat-form-field class="form-width">
+          <input readonly="{{!auxiliaryAttempts[element.id].attempt}}" matInput [(ngModel)]="element.auxiliaryInput"
+            (blur)="checkAuxiliary(element.id, element.auxiliary, element.auxiliaryInput)">
+          <mat-icon *ngIf="auxiliaryAttempts[element.id].response; else wrong" matSuffix class="correct">done</mat-icon>
+          <ng-template #wrong>
+            <mat-icon *ngIf="!auxiliaryAttempts[element.id].attempt" matSuffix class="wrong" matTooltipPosition="above"
+              matTooltip="{{element.auxiliary}}" matTooltipClass="tooltip-red">close</mat-icon>
+          </ng-template>
+        </mat-form-field>
+      </td>
+    </ng-container>
 
-  <ng-container matColumnDef="participleInput">
-    <th mat-header-cell *matHeaderCellDef> Partizip</th>
-    <td mat-cell *matCellDef="let element">
-      <mat-form-field class="example-full-width">
-        <input readonly="{{!participleAttempts[element.id].attempt}}" matInput [(ngModel)]="element.participleInput"
-          (blur)="checkParticiple(element.id, element.participle, element.participleInput)">
-        <mat-icon *ngIf="participleAttempts[element.id].response; else wrong" matSuffix class="correct">done</mat-icon>
-        <ng-template #wrong>
-          <mat-icon
-            *ngIf="participleAttempts[element.id].attempt && participleAttempts[element.id].attempt < 3; else finished"
-            matSuffix class="wrong" matTooltip="+ {{participleAttempts[element.id].attempt}}" matTooltipPosition="above"
-            matTooltipClass="tooltip-red">error
+    <ng-container matColumnDef="participleInput">
+      <th mat-header-cell *matHeaderCellDef> Partizip</th>
+      <td mat-cell *matCellDef="let element">
+        <mat-form-field class="form-width">
+          <input readonly="{{!participleAttempts[element.id].attempt}}" matInput [(ngModel)]="element.participleInput"
+            (blur)="checkParticiple(element.id, element.participle, element.participleInput)">
+          <mat-icon *ngIf="participleAttempts[element.id].response; else wrong" matSuffix class="correct">done
           </mat-icon>
-          <ng-template #finished>
+          <ng-template #wrong>
+            <mat-icon
+              *ngIf="participleAttempts[element.id].attempt && participleAttempts[element.id].attempt < 3; else finished"
+              matSuffix class="wrong" matTooltip="+ {{participleAttempts[element.id].attempt}}"
+              matTooltipPosition="above" matTooltipClass="tooltip-red">error
+            </mat-icon>
+            <ng-template #finished>
+              <mat-icon *ngIf="!participleAttempts[element.id].attempt" matSuffix class="wrong"
+                matTooltip="{{element.participle}}" matTooltipPosition="above" matTooltipClass="tooltip-red">close
+              </mat-icon>
+            </ng-template>
+          </ng-template>
+        </mat-form-field>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <div class="form-button">
+    <button (keyup.enter)="showResult()" (click)="showResult()" mat-raised-button color="primary">Siehe
+      Ergebnis</button>
+  </div>
+</div>
+
+
+<div class="mobile">
+  <div *ngFor="let element of dataSource" class="landing-form">
+    <div class="element-container">
+      <form class="element-form box-shadow">
+        <div class="title-div">
+          <h2 matTooltip="{{element.translation}}" matTooltipPosition="above" matTooltipClass="tooltip">{{element.verb}}
+          </h2>
+        </div>
+        <div class="form-item">
+          <div class="label-div">
+            <label>Auxiliary: </label>
+          </div>
+          <mat-radio-group>
+            <mat-radio-button disabled="{{!auxiliaryAttempts[element.id].attempt}}" value="sein"
+              [(ngModel)]="element.auxiliaryInput" [ngModelOptions]="{standalone: true}" name="auxiliary"
+              ngDefaultControl>
+              Sein
+            </mat-radio-button>
+            <mat-radio-button disabled="{{!auxiliaryAttempts[element.id].attempt}}" value="haben"
+              [(ngModel)]="element.auxiliaryInput" [ngModelOptions]="{standalone: true}" name="auxiliary"
+              ngDefaultControl>
+              Haben
+            </mat-radio-button>
+          </mat-radio-group>
+          <mat-icon *ngIf="auxiliaryAttempts[element.id].response; else wrong" matSuffix class="correct">done</mat-icon>
+          <ng-template #wrong>
+            <mat-icon *ngIf="!auxiliaryAttempts[element.id].attempt" matSuffix class="wrong" matTooltipPosition="above"
+              matTooltip="{{element.auxiliary}}" matTooltipClass="tooltip-red">close</mat-icon>
+          </ng-template>
+        </div>
+        <div class="form-item">
+          <mat-form-field class="form-width">
+            <mat-label>Participle</mat-label>
+            <input readonly="{{!participleAttempts[element.id].attempt}}" matInput [(ngModel)]="element.participleInput"
+              [ngModelOptions]="{standalone: true}" name="participle" ngDefaultControl>
+            <mat-icon *ngIf="participleAttempts[element.id].response" matSuffix class="correct">done
+            </mat-icon>
+            <mat-icon
+              *ngIf="participleAttempts[element.id].attempt && participleAttempts[element.id].attempt < 3 && !participleAttempts[element.id].response"
+              matSuffix class="wrong" matTooltip="+ {{participleAttempts[element.id].attempt}}"
+              matTooltipPosition="above" matTooltipClass="tooltip-red">error
+            </mat-icon>
             <mat-icon *ngIf="!participleAttempts[element.id].attempt" matSuffix class="wrong"
               matTooltip="{{element.participle}}" matTooltipPosition="above" matTooltipClass="tooltip-red">close
             </mat-icon>
-          </ng-template>
-        </ng-template>
-      </mat-form-field>
-    </td>
-  </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
-
-<div class="form-button">
-  <button (keyup.enter)="showResult()" (click)="showResult()" mat-raised-button color="primary">Siehe Ergebnis</button>
+          </mat-form-field>
+        </div>
+        <div class="form-button">
+          <button mat-raised-button color="primary"
+            (click)="checkVerb(element.id, element.auxiliary, element.auxiliaryInput, element.participle, element.participleInput)">Spielen</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div style="padding-bottom: 50px;" class="form-button">
+    <button (keyup.enter)="showResult()" (click)="showResult()" mat-raised-button color="primary">Siehe
+      Ergebnis</button>
+  </div>
 </div>

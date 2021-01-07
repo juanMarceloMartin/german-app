@@ -1,3 +1,9 @@
+.form-container {
+  margin-top: 2%;
+  padding: 50px 20px;
+  font-size: larger;
+}
+
 .form-container .mat-form-field + .mat-form-field {
     margin-left: 8px;
   }
@@ -20,17 +26,23 @@
 
 form {
     padding: 10px;
-    border: 1px solid black;
-    border-radius: 4px;
-    margin-top: 10%;
+    border-radius: 20px;
+    background: white;
 }
 
-h2 {
+.label-div {
+  margin-bottom: 20px;
+}
+
+.title-div {
     text-align: center;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+
 }
 
 .form-item {
-    margin-bottom: 30px !important;
+    margin-bottom: 40px !important;
 }
 
 .form-button {
@@ -39,22 +51,8 @@ h2 {
     justify-content: center;
 }
 
-.landing-title {
-    float: left;
-    width: 60%;
-    height: 100vh;
-}
-
-.landing-title div {
-    width: 70%;
-    display: inline-block;
-    margin-left: 20%;
-    margin-top: 20%;
-}
-
 .landing-form {
-    padding: 20px;
-    float: left;
-    width: 40%;
-    height: 100vh;
+    display: flex;
+    justify-content: center;
 }
+

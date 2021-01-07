@@ -1,6 +1,6 @@
 <p>
     <mat-toolbar color="primary">
-      <span [routerLink]="['/']" class="app-logo" >My App</span>
+      <span [routerLink]="['/']" class="app-logo" (click)="resetInput()" >My App</span>
       <span class="spacer"></span>
       <div class="navbar-input">
         <input (keyup.enter)="searchForInput()" [(ngModel)]="userInput" placeholder="Was suchen Sie?">

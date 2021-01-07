@@ -109,4 +109,16 @@ export class VerbsComponent implements OnInit {
     this.dialog.open(GameResultComponent, dialogConfig);
     this.ngOnInit();
   }
+
+  checkVerb(id: number, article: string, articleInput: string, plural: string, pluralInput: string) {
+    if (articleInput) {
+      this.checkAuxiliary(id, article, articleInput)
+    };
+
+    if (pluralInput) {
+      this.checkParticiple(id, plural, pluralInput)
+    };
+  }
+
+
 }
