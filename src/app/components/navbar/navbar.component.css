@@ -1,6 +1,6 @@
 .navbar-input {
     position: relative; 
-    right: 34.5%;
+    right: 38.5%;
     width: 490px;
     background-color: white;
     border-radius: 100px;
@@ -24,89 +24,94 @@ input {
     cursor: pointer;
 }
 
+img {
+    width: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    outline: none;
+}
+
 @media (max-width: 1680px) {
     .navbar-input {
-        right: 32%;
+        right: 35%;
     }
 }
 
 @media (max-width: 1600px) {
     .navbar-input {
-        right: 31%;
+        right: 34%;
     }
 }
 
 @media (max-width: 1400px) {
     .navbar-input {
-        right: 29%;
+        right: 32%;
     }
 }
 
 
 @media (max-width: 1280px) {
     .navbar-input {
-        right: 27%;
+        right: 30%;
     }
 }
 
 @media (max-width: 1024px) {
     .navbar-input {
-        right: 22%;
+        right: 25%;
     }
 }
 
 
 @media (max-width: 962px) {
     .navbar-input {
-        right: 18%;
+        right: 23%;
     }
 }
 
 @media (max-width: 834px) {
     .navbar-input {
-        right: 14%;
+        right: 19%;
     }
 }
 
 
 @media (max-width: 800px) {
     .navbar-input {
-        right: 12%;
+        right: 18%;
     }
 }
 
 @media (max-width: 768px) {
     .navbar-input {
-        right: 10%;
+        right: 16%;
     }
 }
 
 @media (max-width: 640px) {
     .navbar-input {
-        right: 5%;
-        width: 410px;
+        right: 8%;
+        width: 500px;
     }
 }
 
 
 @media (max-width: 480px) {
     .navbar-input {
-        right: 5%;
-        width: 240px;
+        right: 2%;
+        width: 380px;
     }
 
     input {
-        width: 87%;
+        width: 90%;
     }
 }
 
 @media (max-width: 360px) {
     .navbar-input {
-        right: 9%;
-        width: 175px;
+        right: 3%;
+        width: 250px;
     }
 
-    input {
-        width: 85%
-    }
+  
 }

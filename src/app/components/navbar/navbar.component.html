@@ -1,13 +1,10 @@
 <p>
     <mat-toolbar color="primary">
-      <span [routerLink]="['/']" class="app-logo" (click)="resetInput()" >My App</span>
+      <img src="../../../assets/SN Spiel.png" (click)="resetInput()" alt="SN Spiel" [routerLink]="['/']">
       <span class="spacer"></span>
       <div class="navbar-input">
         <input (keyup.enter)="searchForInput()" [(ngModel)]="userInput" placeholder="Was suchen Sie?">
         <mat-icon (click)="searchForInput()" class="search-icon">search</mat-icon>
       </div>
-      <button mat-icon-button>
-        <mat-icon>login</mat-icon>
-      </button>
     </mat-toolbar>
   </p>
