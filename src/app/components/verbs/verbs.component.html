@@ -93,16 +93,21 @@
             <mat-label>Participle</mat-label>
             <input readonly="{{!participleAttempts[element.id].attempt}}" matInput [(ngModel)]="element.participleInput"
               [ngModelOptions]="{standalone: true}" name="participle" ngDefaultControl>
-            <mat-icon *ngIf="participleAttempts[element.id].response" matSuffix class="correct">done
+            <mat-icon *ngIf="participleAttempts[element.id].response; else wrongMobile" matSuffix class="correct">done
             </mat-icon>
-            <mat-icon
-              *ngIf="participleAttempts[element.id].attempt && participleAttempts[element.id].attempt < 3 && !participleAttempts[element.id].response"
-              matSuffix class="wrong" matTooltip="+ {{participleAttempts[element.id].attempt}}"
-              matTooltipPosition="above" matTooltipClass="tooltip-red">error
-            </mat-icon>
-            <mat-icon *ngIf="!participleAttempts[element.id].attempt" matSuffix class="wrong"
-              matTooltip="{{element.participle}}" matTooltipPosition="above" matTooltipClass="tooltip-red">close
-            </mat-icon>
+
+            <ng-template #wrongMobile>
+              <mat-icon
+                *ngIf="participleAttempts[element.id].attempt && participleAttempts[element.id].attempt < 3; else finishedMobile"
+                matSuffix class="wrong" matTooltip="+ {{participleAttempts[element.id].attempt}}"
+                matTooltipPosition="above" matTooltipClass="tooltip-red">error
+              </mat-icon>
+              <ng-template #finishedMobile>
+                <mat-icon *ngIf="!participleAttempts[element.id].attempt" matSuffix class="wrong" matTooltip="{{element.participle}}" matTooltipPosition="above"
+                  matTooltipClass="tooltip-red">close
+                </mat-icon>
+              </ng-template>
+            </ng-template>
           </mat-form-field>
         </div>
         <div class="form-button">

@@ -101,8 +101,8 @@ export class NounsComponent implements OnInit {
 
     const dialogConfig = new MatDialogConfig();
     dialogConfig.data = { result, message, resultColor };
-    dialogConfig.height = '65%';
-    dialogConfig.width = '30%';
+    dialogConfig.height = '420px';
+    dialogConfig.width = '350px';
 
     this.dialog.open(GameResultComponent, dialogConfig);
     this.ngOnInit();

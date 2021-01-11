@@ -104,15 +104,20 @@
             <mat-label>Plural</mat-label>
             <input readonly="{{!pluralAttempts[element.id].attempt}}" matInput [(ngModel)]="element.pluralInput"
               [ngModelOptions]="{standalone: true}" name="plural" ngDefaultControl>
-            <mat-icon *ngIf="pluralAttempts[element.id].response; else wrong" matSuffix class="correct">done</mat-icon>
-            <mat-icon
-              *ngIf="!pluralAttempts[element.id].response && pluralAttempts[element.id].attempt && pluralAttempts[element.id].attempt !== 3"
-              matSuffix class="wrong" matTooltip="+ {{pluralAttempts[element.id].attempt}}" matTooltipPosition="above"
-              matTooltipClass="tooltip-red">error
+            <mat-icon *ngIf="pluralAttempts[element.id].response; else wrongMobile" matSuffix class="correct">done
             </mat-icon>
-            <mat-icon *ngIf="!pluralAttempts[element.id].attempt" matSuffix class="wrong"
-              matTooltip="{{element.plural}}" matTooltipPosition="above" matTooltipClass="tooltip-red">close
-            </mat-icon>
+            <ng-template #wrongMobile>
+              <mat-icon
+                *ngIf="pluralAttempts[element.id].attempt && pluralAttempts[element.id].attempt < 3; else finishedMobile"
+                matSuffix class="wrong" matTooltip="+ {{pluralAttempts[element.id].attempt}}" matTooltipPosition="above"
+                matTooltipClass="tooltip-red">error
+              </mat-icon>
+              <ng-template #finishedMobile>
+                <mat-icon *ngIf="!pluralAttempts[element.id].attempt" matSuffix class="wrong"
+                  matTooltip="{{element.plural}}" matTooltipPosition="above" matTooltipClass="tooltip-red">close
+                </mat-icon>
+              </ng-template>
+            </ng-template>
           </mat-form-field>
         </div>
         <div class="form-button">
