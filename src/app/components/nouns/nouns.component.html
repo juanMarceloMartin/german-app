@@ -106,7 +106,7 @@
               [ngModelOptions]="{standalone: true}" name="plural" ngDefaultControl>
             <mat-icon *ngIf="pluralAttempts[element.id].response; else wrong" matSuffix class="correct">done</mat-icon>
             <mat-icon
-              *ngIf="pluralAttempts[element.id].attempt && pluralAttempts[element.id].attempt < 3 && !pluralAttempts[element.id].response"
+              *ngIf="!pluralAttempts[element.id].response && pluralAttempts[element.id].attempt && pluralAttempts[element.id].attempt !== 3"
               matSuffix class="wrong" matTooltip="+ {{pluralAttempts[element.id].attempt}}" matTooltipPosition="above"
               matTooltipClass="tooltip-red">error
             </mat-icon>

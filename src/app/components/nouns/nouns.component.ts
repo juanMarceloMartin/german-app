@@ -58,7 +58,6 @@ export class NounsComponent implements OnInit {
         this.pluralAttempts[id].response = true;
       }
     }
-    console.log(this.pluralAttempts[id].response)
   }
 
   showResult() {
@@ -107,11 +106,6 @@ export class NounsComponent implements OnInit {
 
     this.dialog.open(GameResultComponent, dialogConfig);
     this.ngOnInit();
-  }
-
-  check(e: any, i: any, d: any) {
-    console.log(d);
-    console.log(e === i)
   }
 
   checkNoun(id: number, article: string, articleInput: string, plural: string, pluralInput: string) {
